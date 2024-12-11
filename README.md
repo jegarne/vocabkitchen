@@ -47,20 +47,32 @@ I should note that the client-side implementation of this was a custom-built tex
 
 For now, that is a solid example of how a domain problem (editing a text and adding word defintions) was modeled using C# classes. I'll walk through the run-time behavior of this code in the next section.
 
-**The Mediator Pattern**
+### The Mediator Pattern
 
-The application uses the [mediator pattern](https://github.com/jbogard/MediatR/wiki) to connect API requests to the domain logic and infrastructure defined in the project. I found this pattern to be slightly more _functional_ than the sometimes bloated service classes you find in n-tier .NET applications, for example, you could imagine a `ReadingService` class, but with our `Reading` domain model, I think that would muddy the waters too much. It also reduces the temptation to write [god objects](https://en.wikipedia.org/wiki/God_object) in a such a service class, and forces you to think in terms of single-responsibility. One trade off is that tracing run-time behavior orchestration can be more complicated.  In this application I use service classes to perform specific tasks, for example, pulling a complete sentence from a `Reading` at a specific index [ExampleSentenceService.cs](VkCore/Services/ExampleSentenceService.cs)
+The application uses the [mediator pattern](https://github.com/jbogard/MediatR/wiki) to expose the domain logic and infrastructure defined in the project via an API. I found this pattern to be slightly more _functional_ than the sometimes bloated service classes you find in n-tier .NET applications, for example, you could imagine a `ReadingService` class instead of the `Reading` domain model and request handlers. I find this pattern also reduces the temptation to write [god objects](https://en.wikipedia.org/wiki/God_object) in a such a service class, and forces you to think in terms of single-responsibility. One trade off is that tracing run-time behavior orchestration can be more complicated.  In this application I use service classes to perform specific tasks, for example, pulling a complete sentence from a `Reading` at a specific index [ExampleSentenceService.cs](VkCore/Services/ExampleSentenceService.cs), and not as a catch-all for business logic.
 
-An interesting workflow to demonstrate the mediator pattern is adding a definition to a text. The requirements were:
+So instead of a structure like
+
+````
+api controller -> dto object -> service class -> big service method that does all the things
+````
+we have
+
+````
+api controller -> request object -> request handler -> domain model -> any events as needed -> event handlers as needed
+````
+
+An straightforward but interesting workflow to demonstrate the mediator pattern is adding a definition to a text. The requirements were:
 
 1. given word polysemy, the definition needed to be connected a specific word definition at a specific index range in a text
 1. we should capture the sentence that contained the word or phrase from the text so we can use it in learning exercises
-1. in adition to generating to capturing the definition, we need to generate an audio file of the pronunciation if we don't already have one.
+1. we need to generate an audio file of the pronunciation if we don't already have one.
 
 Given the domain models (`Reading` and `ContentItem`) from the above section, this is how adding a definition would flow through the application.
 
-1. The user chooses some definition values in [definition-modal.component.ts](VkWeb/ClientApp/src/app/org-dashboard/definition-modal/definition-modal.component.ts). These values are posted back to the API via the Angular `ReadingService`
-1. The values from the client come into the API [ReadingController](VkWeb/Controllers/ReadingController.cs) as an `AddDefinitionRequest`. The mediator pattern leads to very thin controller actions, and all we do here is grab the user id from the request context and pass the data off to `MediatR`.
-1. `MediatR` matches our request to the [AddDefinitionRequestHandler](VkInfrastructure/RequestHandlers/ReadingHandlers/AddDefinitionRequestHandler.cs).  The request handlers here do several jobs: 1) do data validation with [guard clauses](<https://en.wikipedia.org/wiki/Guard_(computer_science)>) as needed, 2) pull back any data needed to hydrate the domain model. In this case we use the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) - [VkCore/Builders/DefinitionBuilder.cs](VkCore/Builders/DefinitionBuilder.cs) - to construct our definition object which we finally pass off to `Reading.InsertDefinition` on our domain model to persist the new definition.
-1. An interesting side effect to note here, part of our domain model is a [WordEntry](VkCore/Models/Word/WordEntry.cs), which is the persisted, dictionary entry equivalent of a `ContentItem`. So when we add a definition to a content item, for example with the value "sad", we also create a "sad" `Word` entry if needed: this is the part of the domain that students study over time. In this case, the `AddDefinitionRequestHandler` conditionally calls the `WordEntry` domain model, which in its constructor fires off a `WordAddedEvent`
-1. A nice feature of the event pattern in mediator is the ability to write multiple single-responsibility handlers to respond to the event, reducing the need to write orchestration code. In this case, the `WordAddedAudioCreationHandler` event fires, sending off a `CreateWordAudioRequest`, which fires the [CreateWordAudioRequestHandler(VkInfrastructure/RequestHandlers/Word/CreateWordAudioRequestHandler.cs) that calls an AWS lambda to asychronously calls a text to speech API and dumps an audio file in an S3 bucket which the client application can use later to play word audio.
+1. **client-side**: The user chooses some definition values in [definition-modal.component.ts](VkWeb/ClientApp/src/app/org-dashboard/definition-modal/definition-modal.component.ts). These values are posted back to the API via the Angular `ReadingService`
+1. **api controller**: The values from the client come into the API [ReadingController](VkWeb/Controllers/ReadingController.cs) as an `AddDefinitionRequest`. The mediator pattern leads to very thin controller actions, and all we do here is grab the user id from the request context and pass the data off to `MediatR`.
+1. **request handler**: `MediatR` matches our request to the [AddDefinitionRequestHandler](VkInfrastructure/RequestHandlers/ReadingHandlers/AddDefinitionRequestHandler.cs).  The request handlers here do several jobs: 1) do data validation with [guard clauses](<https://en.wikipedia.org/wiki/Guard_(computer_science)>) as needed, 2) pull back any data needed to hydrate the domain model. In this case we use the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) - [VkCore/Builders/DefinitionBuilder.cs](VkCore/Builders/DefinitionBuilder.cs) - to construct our definition object
+1. **domain model**: we finally pass off to `Reading.InsertDefinition` on our domain model to persist the new definition.
+1. **events**: An interesting side effect to note here, part of our domain model is a [WordEntry](VkCore/Models/Word/WordEntry.cs), which is the persisted, dictionary entry equivalent of a `ContentItem`. So when we add a definition to a content item, for example with the value "sad", we also create a "sad" `Word` entry if needed: this is the part of the domain that students study over time. In this case, the `AddDefinitionRequestHandler` conditionally calls the `WordEntry` domain model, which in its constructor fires off a [WordAddedEvent](VkCore/Events/Word/WordAddedEvent.cs)
+1. **event handler**: A nice feature of the event pattern in mediator is the ability to write multiple single-responsibility handlers to respond to the event, reducing the need to write orchestration code. In this case, the `WordAddedAudioCreationHandler` event fires, sending off a `CreateWordAudioRequest`, which fires the [CreateWordAudioRequestHandler](VkInfrastructure/RequestHandlers/Word/CreateWordAudioRequestHandler.cs) that calls an AWS lambda which asychronously calls a text to speech API and dumps an audio file in an S3 bucket which the client application can use later to play word audio.
