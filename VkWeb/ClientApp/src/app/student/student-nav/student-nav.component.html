@@ -1,0 +1,10 @@
+<p>
+  <a [routerLink]="['/student/words']">
+    My Words
+    <span class="badge badge-danger" *ngIf="student.inProgressWordsCount">{{student.inProgressWordsCount}}</span>
+  </a> |
+  <a [routerLink]="['/student/readings']">
+    My Readings
+    <span class="badge badge-danger" *ngIf="student.newReadingsCount">{{student.newReadingsCount}}</span>
+  </a>
+</p>

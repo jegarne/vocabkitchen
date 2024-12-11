@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-4">
+    <h2>My Account</h2>
+    <!--<div>
+      {{user.firstName}} {{user.lastName}}
+    </div>-->
+    <div>
+      <p>Change Password</p>
+      <form [formGroup]="loginForm" (ngSubmit)="submitNewPassword()">
+        <div class="form-group">
+          <label>Old Password</label>
+          <input class="form-control" formControlName="oldPassword" type="password"
+                 [ngClass]="loginForm.get('oldPassword').invalid
+                 && (loginForm.get('oldPassword').dirty || loginForm.get('oldPassword').touched)? 'is-invalid' : ''" />
+          <div class="invalid-feedback">
+            <ng-container *ngFor="let error of errorMessages.oldPassword">
+              <div class="error-message" *ngIf="loginForm.get('oldPassword').hasError(error.type) && (loginForm.get('oldPassword').dirty || loginForm.get('oldPassword').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>New Password</label>
+          <input class="form-control" formControlName="newPassword" type="password"
+                 [ngClass]="loginForm.get('newPassword').invalid
+                 && (loginForm.get('newPassword').dirty || loginForm.get('newPassword').touched)? 'is-invalid' : ''" />
+          <div class="invalid-feedback">
+            <ng-container *ngFor="let error of errorMessages.newPassword">
+              <div class="error-message" *ngIf="loginForm.get('newPassword').hasError(error.type)
+                 && (loginForm.get('newPassword').dirty || loginForm.get('newPassword').touched)">
+                {{ error.message }}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input class="form-control" formControlName="confirmPassword" type="password"
+                 [ngClass]="loginForm.hasError('passwordMismatch')
+                 && (loginForm.get('confirmPassword').dirty || loginForm.get('confirmPassword').touched)? 'is-invalid' : ''" />
+          <div class="invalid-feedback">
+            <div *ngIf="loginForm.hasError('passwordMismatch')
+                 && (loginForm.get('confirmPassword').dirty
+                 || loginForm.get('confirmPassword').touched)">
+              Passwords do not match
+            </div>
+          </div>
+        </div>
+
+        <button class="form-control btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
+      </form>
+      <div *ngIf="result" class="alert alert-success mt-2" role="alert">
+        {{result}}
+      </div>
+      <server-errors [serverErrors]="serverErrors"></server-errors>
+    </div>
+  </div>
+</div>

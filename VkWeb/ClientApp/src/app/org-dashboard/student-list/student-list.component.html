@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <org-dashboard-nav [id]="orgId" [title]="'Student Progress'"></org-dashboard-nav>
+    <table mat-table [dataSource]="students" class="mat-elevation-z8" matSort>
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+        <td mat-cell *matCellDef="let student"> {{student.firstName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+        <td mat-cell *matCellDef="let student"> {{student.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="newReadingsCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> New Readings </th>
+        <td mat-cell *matCellDef="let student"> {{student.newReadingsCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="newWordsCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> New Words </th>
+        <td mat-cell *matCellDef="let student"> {{student.newWordsCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="inProgressWordsCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> In Progress </th>
+        <td mat-cell *matCellDef="let student"> {{student.inProgressWordsCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="knownWordsCount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Known Words </th>
+        <td mat-cell *matCellDef="let student"> {{student.knownWordsCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let student">
+          <a [routerLink]="['/org/details', orgId, 'student', 'details', student.id]">
+            details
+          </a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

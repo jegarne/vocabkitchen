@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <org-admin-nav [id]="orgId" [title]="'Teachers'"></org-admin-nav>
+    <div class="alert alert-primary" role="alert">
+      Email your colleagues to invite them to VocabKitchen. You will be able to
+      share materials and work collaboratively with teachers that you invite.
+    </div>
+    <p>You can send multiple invites at once, just put one email per line.</p>
+    <invite-box (updateEmails)="handleUpdateEmails($event)"></invite-box><br />
+    <button (click)="sendInvites()" class="btn btn-outline-dark">Invite</button>
+    <br />
+    <server-errors [serverErrors]="serverErrors"></server-errors>
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Teacher</th>
+          <th>Email</th>
+          <th>Pending</th>
+          <th>Remove</th>
+          <th>Is Admin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let teacher of teachers; let i = index">
+          <td>{{i+1}}.</td>
+          <td>
+            {{teacher.firstName}} {{teacher.lastName}}
+            {{teacher.isMe ? "(you)" : ""}}
+            {{teacher.isInvitePending ? teacher.email : ""}}
+          </td>
+          <td>
+            {{teacher.email}} <i *ngIf="student.isBounced " class="fas fa-exclamation-triangle"></i>
+          </td>
+          <td>
+            <i *ngIf="teacher.isInvitePending " class="fas fa-check"></i>
+          </td>
+          <td>
+            <button *ngIf="!teacher.isInvitePending  && !teacher.isMe" class="btn btn-outline-dark btn-sm btn-no-outline"
+                    (click)="removeTeacher(teacher.id)">
+              <i class="fas fa-user-times"></i>
+            </button>
+            <button *ngIf="teacher.isInvitePending" class="btn btn-outline-dark btn-sm btn-no-outline"
+                    (click)="removeInvite(teacher.email)">
+              <i class="fas fa-user-times"></i>
+            </button>
+          </td>
+          <td>
+            <button *ngIf="teacher.isAdmin && !teacher.isInvitePending" class="btn btn-link btn-sm"
+                    (click)="removeAdmin(teacher.id)">
+              remove
+            </button>
+            <button *ngIf="!teacher.isAdmin && !teacher.isInvitePending" class="btn btn-link btn-sm"
+                    (click)="setAdmin(teacher.id)">
+              add
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

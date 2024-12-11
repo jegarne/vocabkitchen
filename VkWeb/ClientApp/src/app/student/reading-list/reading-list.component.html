@@ -1,0 +1,17 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <student-nav [id]="id"></student-nav>
+    <h3>My Readings</h3>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let reading of readings; let i = index">
+
+        <a [routerLink]="['/student/read', reading.id]">
+          {{ reading.title }}
+        </a>
+        <span class="badge badge-danger badge-pill" *ngIf="reading.newWords">{{reading.newWords}}</span>
+        <span class="badge badge-warning badge-pill" *ngIf="reading.inProgressWords">{{reading.inProgressWords}}</span>
+        <span class="badge badge-success badge-pill" *ngIf="reading.knownWords">{{reading.knownWords}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

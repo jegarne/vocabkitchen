@@ -1,0 +1,13 @@
+<mat-expansion-panel *ngFor="let word of words; let i = index">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span class="{{wordClass}}"><b>{{i + 1}}. {{ word.word }}</b></span>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div style="padding: 5px;">
+    <p>{{word.definition}}</p>
+    <p *ngFor="let s of word.sentences"><em [innerHTML]="s"></em></p>
+    <word-audio-player [word]="word.word" [autoplay]="false"></word-audio-player>
+  </div>
+  <hr />
+</mat-expansion-panel>

@@ -1,0 +1,8 @@
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  /*text-align: center;*/
+  padding: 0 15px 0 0;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none;
+}

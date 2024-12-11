@@ -1,0 +1,120 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import "~@angular/material/prebuilt-themes/purple-green.css";*/
+
+@import "./theme.scss";
+
+/* Customize container */
+@media (min-width: 48em) {
+  .container {
+    margin-top: 10px;
+    max-width: 40rem;
+  }
+}
+
+.container-narrow > hr {
+  margin: 2rem 0;
+}
+
+/* material overrides */
+.mat-button-toggle-label-content {
+  line-height: 0px !important;
+}
+
+.mat-button-toggle-button {
+  padding: 1px 6px !important;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+.mat-expansion-panel-header {
+  padding: 0 !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.btn-link {
+  padding-left: 0;
+  padding-bottom: 10px;
+}
+
+.profiler1kWord.hideProfilerStyles, .profiler2kWord.hideProfilerStyles, .profilerAwlWord.hideProfilerStyles,
+.profilerA1Word.hideProfilerStyles, .profilerA2Word.hideProfilerStyles, .profilerB1Word.hideProfilerStyles,
+.profilerB2Word.hideProfilerStyles, .profilerC1Word.hideProfilerStyles, .profilerC2Word.hideProfilerStyles {
+  color: Black;
+}
+
+.profilerOffList {
+  color: #575757 !important;
+  font-weight: normal !important;
+}
+
+.profilerResults span.word:hover {
+  color: Maroon;
+}
+
+.profilerAwlWord {
+  color: #b200ff;
+  font-weight: bold;
+}
+
+.awlStroop {
+  background-color: #b200ff;
+}
+
+.profilerA1Word {
+  color: #0099CC;
+  font-weight: bold;
+}
+
+.a1Stroop {
+  background-color: #0099CC;
+}
+
+.profilerA2Word {
+  color: #00bb00;
+  font-weight: bold;
+}
+
+.a2Stroop {
+  background: #00bb00;
+}
+
+.profilerB1Word {
+  color: #ff9900;
+  font-weight: bold;
+}
+
+.b1Stroop {
+  background: #ff9900;
+}
+
+.profilerB2Word {
+  color: #B30000;
+  font-weight: bold;
+}
+
+.b2Stroop {
+  background: #CD5C5C;
+}
+
+.profilerC1Word {
+  color: #D733FF;
+  font-weight: bold;
+}
+
+.c1Stroop {
+  background: #D733FF;
+}
+
+.profilerC2Word {
+  color: #DB7093;
+  font-weight: bold;
+}
+
+.c2Stroop {
+  background: #D4318C;
+}

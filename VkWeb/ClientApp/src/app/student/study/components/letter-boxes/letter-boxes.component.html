@@ -1,0 +1,14 @@
+<div #spellingBoxes>
+  <span *ngFor="let letter of correctAnswer; let i = index;" [ngClass]="{'hidden': isSpace(letter)}">
+    <input focusInput type="text" class="letterBox" maxlength="1"
+           autocorrect="off" autocapitalize="none" autocomplete="off"
+           id="letter-{{i}}"
+           [ngClass]="{'vowel': isVowel(letter)}"
+           [disabled]="isPrefilled(letter, i)"
+           [myValue]="userAnswer[i]"
+           [myFocus]="hasFocus(i)"
+           (input)="checkAnswer($event, i)"
+           (keydown)="handleBackspace($event, i)"
+           />
+  </span>
+</div>

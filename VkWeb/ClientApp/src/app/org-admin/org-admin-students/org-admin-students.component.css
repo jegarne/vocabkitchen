@@ -1,0 +1,13 @@
+.btn-no-outline {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+td, th {
+  padding: 2px 10px;
+}
+
+p {
+  width: 80%;
+}

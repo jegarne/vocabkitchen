@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-8">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand" [routerLink]='["/"]'>VocabKitchen</a>
+
+      <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" [collapse]="isCollapsed">
+        <ul class="navbar-nav mr-auto" *ngIf="isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]='["/profile"]'>Profile</a>
+          </li>
+          <li class="nav-item" *ngIf="isAdmin">
+            <a class="nav-link" [routerLink]='["/org-admin/select"]'>Users</a>
+          </li>
+          <li class="nav-item" *ngIf="isTeacher">
+            <a class="nav-link" [routerLink]='["/org/select"]'>Plan</a>
+          </li>
+          <li class="nav-item" *ngIf="isStudent">
+            <a class="nav-link" [routerLink]='["/student/words"]'>Study</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+          <li class="nav-item">
+            <a class="btn btn-sm btn-outline-secondary mr-2" [routerLink]='["/login"]'>Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-sm btn-outline-primary mr-2" [routerLink]='["/sign-up"]'>Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-sm btn-success mr-2" [routerLink]='["/feedback"]'>Feedback</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-sm btn-outline-secondary" [routerLink]='["/updates"]'>Updates</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]='["/user-profile"]'>My Account</a>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link btn btn-link mr-2" (click)="signOut()">Sign Out</button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mr-2" [routerLink]='["/feedback"]'>Feedback</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]='["/updates"]'>Updates</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

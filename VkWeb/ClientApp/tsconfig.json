@@ -1,0 +1,34 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "module": "es2015",
+    "baseUrl": "./src",
+    "paths": {
+      "@services/*": [ "app/core/services/*" ],
+      "@models/*": [
+        "app/org-admin/models/*",
+        "app/org-dashboard/models/*",
+        "app/public/models/*",
+        "app/shared/models/*",
+        "app/student/models/*",
+        "app/user-profile/models/*"
+      ],
+      "@shared/*": [ "app/shared/*" ]
+    }
+  }
+}

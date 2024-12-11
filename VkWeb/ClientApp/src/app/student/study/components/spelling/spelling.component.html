@@ -1,0 +1,9 @@
+<p><b>Complete the word</b></p>
+<div>
+  <letter-boxes [word]="word"
+                (isCorrect)="handleAnswer($event)">
+  </letter-boxes>
+</div>
+<br />
+<word-audio-player *ngIf="allowSound" [word]="word" [autoplay]="true"></word-audio-player>
+

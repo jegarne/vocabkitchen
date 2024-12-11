@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <p>
+      <button (click)="back()" class="btn btn-link">
+        Back
+      </button>
+    </p>
+    <p><b>{{ tag.value }} students</b></p>
+    <p>
+      <mat-checkbox [checked]="areAllSelected"
+                    (change)="toggleCheckboxes($event)">
+        Select All
+      </mat-checkbox>
+    </p>
+    <form [formGroup]="studentsFormGroup">
+      <ng-container formArrayName="students">
+        <ol>
+          <li *ngFor="let student of org.students; let i = index">
+            <mat-checkbox [formControlName]="i">
+              <a [routerLink]="['/org/details', orgId, 'student', 'details', student.id]" target="_blank">
+                {{ student.firstName }} {{ student.lastName }}
+              </a>
+            </mat-checkbox>
+          </li>
+          <li>
+            <br />
+            <button type="button" class="btn btn-primary" (click)="saveSelectedStudents()">Save</button>
+          </li>
+        </ol>
+      </ng-container>
+    </form>
+  </div>
+</div>
+

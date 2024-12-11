@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <student-nav></student-nav>
+    <hr />
+    <div *ngIf="currentWord">
+      <div *ngIf="step === 0">
+        <div>
+          <multiple-choice [word]="currentWord"
+                           [distractors$]="distractors$"
+                           (isCorrect)="handleMultipleChoiceAnswer($event, i)">
+          </multiple-choice>
+        </div>
+      </div>
+
+      <div *ngIf="step === 1">
+        <div>
+          <spelling [word]="currentWord.word"
+                    (isCorrect)="handleSpellingAnswer($event, i)">
+          </spelling>
+        </div>
+        <br />
+        <button type="button" (click)="nextStep(true, 'spelling')" class="btn btn-outline-primary" >Skip</button>
+      </div>
+
+      <div *ngIf="step === 2">
+        <div>
+          <cloze [word]="currentWord.word"
+                 [sentences]="currentWord.sentences"
+                 (isCorrect)="handleClozeAnswer($event, i)">
+          </cloze>
+        </div>
+        <br />
+        <button type="button" (click)="nextStep(true, 'cloze')" class="btn btn-outline-primary" >Skip</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+ol {
+  display: table;
+  margin: 30px 0 10px 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+li {
+  display: table-row;
+  counter-increment: table-ol;
+}
+
+li:before {
+  content: counter(table-ol) ".";
+  display: table-cell;
+  padding-right: 0.4em;
+  text-align: right;
+}
+
+
+
+

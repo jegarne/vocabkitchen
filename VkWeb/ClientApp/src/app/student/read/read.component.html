@@ -1,0 +1,27 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <p>
+      <a [routerLink]="['/student/readings']">
+        Back
+      </a>
+    </p>
+
+    <h3>{{reading.title}}</h3>
+
+    <p>
+      <a [routerLink]="['/student/study', reading.id ]">
+        study words
+      </a>
+      <span class="badge badge-danger badge-pill" *ngIf="reading.newWords">{{reading.newWords}}</span>
+      <span class="badge badge-warning badge-pill" *ngIf="reading.inProgressWords">{{reading.inProgressWords}}</span>
+      <span class="badge badge-success badge-pill" *ngIf="reading.knownWords">{{reading.knownWords}}</span>
+    </p>
+
+    <pre><span *ngFor="let item of reading.contentItems; index as i;"
+           [ngClass]="{'defined' : item.definition !== null}"
+           (click)="showDefinition(item)">{{item.value}}</span></pre>
+
+
+
+  </div>
+</div>

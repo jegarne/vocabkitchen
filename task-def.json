@@ -1,0 +1,71 @@
+{
+	"ipcMode": null,
+	"executionRoleArn": "arn:aws:iam::964863302091:role/VocabKitchen-ECSTaskExecutionRole-1OTXPLK0SSQS5",
+	"containerDefinitions": [
+		{
+			"dnsSearchDomains": [],
+			"logConfiguration": { 
+            "logDriver": "awslogs",
+				"options": { 
+					"awslogs-group" : "vocabkitchen-ecs",
+					"awslogs-region": "us-east-1",
+					"awslogs-stream-prefix": "ecs"
+				}
+			},
+			"entryPoint": [],
+			"portMappings": [
+				{
+				  "hostPort": 80,
+				  "protocol": "tcp",
+				  "containerPort": 80
+				}
+			  ],
+			"command": [],
+			"linuxParameters": null,
+			"cpu": 256,
+			"environment": [],
+			"resourceRequirements": null,
+			"ulimits": null,
+			"dnsServers": null,
+			"mountPoints": [],
+			"workingDirectory": null,
+			"secrets": null,
+			"dockerSecurityOptions": null,
+			"memory": 512,
+			"memoryReservation": null,
+			"volumesFrom": [],
+			"stopTimeout": null,
+			"image": "964863302091.dkr.ecr.us-east-1.amazonaws.com/mighty-sandbox/vocabkitchen:latest",
+			"startTimeout": null,
+			"firelensConfiguration": null,
+			"dependsOn": null,
+			"disableNetworking": null,
+			"interactive": null,
+			"healthCheck": null,
+			"essential": true,
+			"links": [],
+			"hostname": null,
+			"extraHosts": [],
+			"pseudoTerminal": null,
+			"user": null,
+			"readonlyRootFilesystem": null,
+			"dockerLabels": {},
+			"systemControls": [],
+			"privileged": null,
+			"name": "vk-ecs"
+		}
+	],
+	"placementConstraints": [],
+	"memory": "512",
+	"taskRoleArn": "arn:aws:iam::964863302091:role/AmazonECSTasksRole",
+	"family": "vk-ecs",
+	"pidMode": null,
+	"requiresCompatibilities": [
+		"FARGATE"
+	],
+	"networkMode": "awsvpc",
+	"cpu": "256",
+	"inferenceAccelerators": null,
+	"proxyConfiguration": null,
+	"volumes": []
+}

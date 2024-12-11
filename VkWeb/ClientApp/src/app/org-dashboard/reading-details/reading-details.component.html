@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <p>
+      <a [routerLink]="['/org/details', orgId]">
+        Back
+      </a>
+    </p>
+
+    <h3>Tags</h3>
+    <hr />
+    <div class="alert alert-primary" role="alert">
+      Readings are shared with students that are grouped under the same tag.
+    </div>
+    <tags-search [orgId]="orgId" [existingTags]="reading.tags"
+                 (newTag)="addTag($event)"
+                 (removedTag)="removeTag($event)"></tags-search>
+
+    <br />
+
+    <h3>{{reading.title}}</h3>
+    <hr />
+    <a class="btn btn-sm btn-outline-primary mr-2" [routerLink]="['/org/details', orgId, 'reading', 'edit', readingId]">
+      Edit
+    </a>
+    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="delete()">Delete</button>
+    <div class="alert alert-primary mt-2" role="alert">
+      Highlight any word or phrase to add a definition.  On mobile devices, highlight the word and then press the highlighted selection.
+    </div>
+    <div (textSelect)="renderRectangles($event)" class="definition-container">
+      <pre><span *ngFor="let item of reading.contentItems; index as i;"
+                 [ngClass]="{'defined' : item.definition !== null}"
+                 (click)="showDefinition(item)">{{item.value}}</span></pre>
+    </div>
+  </div>
+</div>

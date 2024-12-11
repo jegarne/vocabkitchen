@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <org-admin-nav [id]="orgId" [title]="'Students'"></org-admin-nav>
+    <div class="alert alert-primary" role="alert">
+      Email your students to invite them to VocabKitchen.
+    </div>
+    <p>
+      You can invite multiple students at once, just put one email per line.
+    </p>
+    <invite-box (updateEmails)="handleUpdateEmails($event)"></invite-box><br />
+    <button (click)="sendInvites()" class="btn btn-outline-dark">Invite</button>
+    <br />
+    <server-errors [serverErrors]="serverErrors"></server-errors>
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Student</th>
+          <th>Email</th>
+          <th>Pending</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students; let i = index">
+          <td>{{i+1}}.</td>
+          <td>
+            {{student.firstName}} {{student.lastName}} {{student.isInvitePending ? "pending" : ""}}
+          </td>
+          <td>
+            {{student.email}} <i *ngIf="student.isBounced " class="fas fa-exclamation-triangle"></i>
+          </td>
+          <td>
+            <i *ngIf="student.isInvitePending " class="fas fa-check"></i>
+          </td>
+          <td>
+            <button *ngIf="!student.isInvitePending" class="btn btn-outline-dark btn-sm btn-no-outline"
+                    (click)="removeStudent(student.id)">
+              <i class="fas fa-user-times"></i>
+            </button>
+            <button *ngIf="student.isInvitePending" class="btn btn-outline-dark btn-sm btn-no-outline"
+                    (click)="removeInvite(student.email)">
+              <i class="fas fa-user-times"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

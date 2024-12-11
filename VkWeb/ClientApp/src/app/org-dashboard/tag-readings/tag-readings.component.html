@@ -1,0 +1,28 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <p>
+      <button (click)="back()" class="btn btn-link">
+        Back
+      </button>
+    </p>
+    <p><b>{{ tag.value }} readings</b></p>
+    <form [formGroup]="readingsFormGroup">
+      <ng-container formArrayName="readings">
+        <ol>
+          <li *ngFor="let reading of org.readings; let i = index">
+            <mat-checkbox [formControlName]="i">
+              <a [routerLink]="['/org/details', orgId, 'reading', 'details', reading.id]" target="_blank">
+                {{ reading.title }}
+              </a>
+            </mat-checkbox>
+          </li>
+          <li>
+            <br />
+            <button type="button" class="btn btn-primary" (click)="saveSelectedReadings()">Save</button>
+          </li>
+        </ol>
+      </ng-container>
+    </form>
+  </div>
+</div>
+

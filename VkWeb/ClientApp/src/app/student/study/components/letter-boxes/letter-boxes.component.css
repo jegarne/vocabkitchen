@@ -1,0 +1,48 @@
+.letterBox {
+  width: 40px;
+  height: 50px;
+  font-size: 2.5em;
+  margin-right: 5px;
+  background-color: #C1F0F6;
+  -webkit-user-select: none;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+  padding: 0;
+}
+
+@media only screen and (max-width: 450px) {
+  .letterBox {
+    width: 20px;
+    height: 30px;
+    font-size: 1em;
+    margin-right: 3px;
+  }
+}
+
+.letterBox:focus {
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696;
+}
+
+.firstLetter {
+  display: inline-block;
+  border: 1px solid black;
+  width: 30px;
+  padding-top: 3px;
+  margin: 0 3px 2px 0;
+}
+
+.vowel {
+  background-color: #EEB4B4;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+  .hidden::after {
+    content: "\A";
+    white-space: pre;
+  }
+
+

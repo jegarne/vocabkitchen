@@ -1,0 +1,32 @@
+td {
+  vertical-align: top;
+}
+
+button {
+  margin-right: 5px;
+}
+
+textarea {
+  margin-top: 32px;
+  height: 500px;
+}
+
+.cefrLevelLabel {
+  float: right;
+}
+
+.result-view {
+  margin-top: 34px;
+}
+
+::ng-deep .mat-tab-label, ::ng-deep .mat-tab-label-active {
+  min-width: 0 !important;
+  padding: 3px !important;
+  margin: 3px !important;
+}
+
+
+.btn-secondary-lite {
+  background-color: #d3d3d3;
+  border-color: #6c757d;
+}

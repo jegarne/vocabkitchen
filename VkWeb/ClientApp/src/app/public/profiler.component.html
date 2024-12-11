@@ -1,0 +1,117 @@
+<div *ngIf="profileResult && !isLoggedIn && hasSignInAlert" class="row justify-content-center">
+  <div class="col-8 alert alert-success">
+    <a [routerLink]='["/login"]' class="alert-link">Sign in</a> to be able to share texts like this with students.
+    No account yet? <a [routerLink]='["/sign-up"]' class="alert-link">Learn more</a> about using VocabKitchen.
+    <button type="button" class="close" aria-label="Close" (click)="closeSignInAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-4">
+    <div *ngIf="!profileResult">
+      <h2>Vocabulary Profiler</h2>
+      <div class="alert alert-primary">
+        Copy and paste some text in the profiler to
+        check its vocabulary level.
+      </div>
+      <p>
+        Profilers are based on these vocabulary lists:
+      </p>
+      <p>
+        <a href="http://en.wikipedia.org/wiki/Common_European_Framework_of_Reference_for_Languages" target="_blank">
+          (CEFR) Common European Framework of Reference for Languages
+        </a>
+      </p>
+      <p><a href="http://simple.wiktionary.org/wiki/Wiktionary:Academic_word_list" target="_blank">(AWL) Academic Word List</a></p>
+      <p><a href="http://www.newgeneralservicelist.org/nawl-new-academic-word-list" target="_blank">(NAWL) New Academic Word List</a></p>
+    </div>
+    <div *ngIf="profileResult">
+      <div class="row">
+        <div class="col-xs-12 mb-3">
+          <span *ngIf="isCefr">
+            <a href="https://en.wikipedia.org/wiki/Common_European_Framework_of_Reference_for_Languages#Common_reference_levels"
+               target="_blank" class="pr-2">
+              CEFR Levels:</a>
+
+            <button type="button" class="btn btn-secondary-lite btn-sm profilerA1Word"
+                    (click)="toggleColor($event, '.profilerA1Word')">A1</button>
+            <button type="button" class="btn btn-secondary-lite btn-sm profilerA2Word"
+                    (click)="toggleColor($event, '.profilerA2Word')">A2</button>
+            <button type="button" class="btn btn-secondary-lite btn-sm profilerB1Word"
+                    (click)="toggleColor($event, '.profilerB1Word')">B1</button>
+            <button type="button" class="btn btn-secondary-lite btn-sm profilerB2Word"
+                    (click)="toggleColor($event, '.profilerB2Word')">B2</button>
+            <button type="button" class="btn btn-secondary-lite btn-sm profilerC1Word"
+                    (click)="toggleColor($event, '.profilerC1Word')">C1</button>
+            <button type="button" class="btn btn-secondary-lite btn-sm profilerC2Word"
+                    (click)="toggleColor($event, '.profilerC2Word')">C2</button>
+          </span>
+          <span *ngIf="!isCefr" style="display: inline-block; margin-bottom: 6px;">
+            <b><span *ngIf="isNawl">New </span>Academic Word List Results</b>
+          </span>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-secondary-lite btn-sm" style="height: 27px; margin-top: -3px;"
+                  (click)="downloadCefrDoc()" *ngIf="isCefr" >
+            <i class="fas fa-file-word"></i>
+          </button>
+          <mat-button-toggle-group #viewType="matButtonToggleGroup" value="text">
+            <mat-button-toggle value="text" aria-label="show text">
+              text
+            </mat-button-toggle>
+            <mat-button-toggle value="table" aria-label="show table">
+              table
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="col-xs-6 ml-2">
+          <b>Word count:</b> {{profileResult.totalWordCount}}
+        </div>
+      </div>
+      <div class="row">
+        <div id="profileResult" *ngIf="viewType.value === 'text'" class="result-view card bg-light">
+          <p style="padding: .375rem 1rem;font-size: 1.02rem;" [innerHTML]="profileResult.paragraphHtml"></p>
+        </div>
+        <div *ngIf="viewType.value === 'table'">
+          <br />
+          <b>Words by Level</b>
+          <mat-tab-group>
+            <mat-tab *ngFor="let key of objectKeys(profileResult.tableResult)" [label]="key + ': ' + profileResult.tableResult[key].percentage">
+              <table>
+                <tr *ngFor="let row of profileResult.tableResult[key].rows">
+                  <td style="text-align: right; padding-right: 8px;">{{row.occurrences}}</td>
+                  <td [innerHTML]="row.rowHtml"></td>
+                </tr>
+              </table>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <form #profilerForm="ngForm" (ngSubmit)="submitCefr()">
+      <div class="form-group">
+        <div *ngIf="profileResult">
+          <h2>Vocabulary Profiler</h2>
+          <div class="mt-2">
+            <button type="submit" class="btn btn-primary">CEFR</button>
+            <button (click)="submitAwl()" type="button" class="btn btn-primary">AWL</button>
+            <button (click)="submitNawl()" type="button" class="btn btn-primary">NAWL</button>
+            <button *ngIf="isLoggedIn && isTeacher" class="btn btn-outline-success" (click)="saveReading()">Save</button>
+          </div>
+        </div>
+        <textarea class="form-control"
+                  oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px";'
+                  id="profilerInput" [(ngModel)]="profilerInput" name="profilerInput"></textarea>
+        <br />
+        <button type="submit" class="btn btn-primary">CEFR</button>
+        <button (click)="submitAwl()" type="button" class="btn btn-primary">AWL</button>
+        <button (click)="submitNawl()" type="button" class="btn btn-primary">NAWL</button>
+      </div>
+    </form>
+  </div>
+</div>

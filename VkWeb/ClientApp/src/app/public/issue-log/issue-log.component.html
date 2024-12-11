@@ -1,0 +1,17 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-4">
+    <h3>Updates</h3>
+    <p>
+      Check here for known problems or recent updates and changes.
+    </p>
+
+    <div *ngFor="let issue of issues;" class="card" style="margin-bottom: 10px;">
+      <div class="card-body">
+        <h5 class="card-title">{{issue.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{issue.date}}</h6>
+        <p class="card-text">{{issue.description}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

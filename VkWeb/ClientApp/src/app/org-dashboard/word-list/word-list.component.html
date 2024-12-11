@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+
+  <div class="col-xs-12 col-md-6">
+    <org-dashboard-nav [id]="orgId" [title]="'Word Progress'"></org-dashboard-nav>
+    <div *ngIf="error" class="alert alert-primary">
+      {{error}}
+    </div>
+    <table mat-table [dataSource]="words" class="mat-elevation-z8" matSort>
+
+      <ng-container matColumnDef="word">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Word </th>
+        <td mat-cell *matCellDef="let word"> {{word.word}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="spellingFailures">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Spelling Failures </th>
+        <td mat-cell *matCellDef="let word"> {{word.spellingFailures}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="spellingAttempts">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Spelling Attempts </th>
+        <td mat-cell *matCellDef="let word"> {{word.spellingAttempts}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="meaningFailures">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Meaning Failures</th>
+        <td mat-cell *matCellDef="let word"> {{word.meaningFailures}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="meaningAttempts">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Meaning Attempts </th>
+        <td mat-cell *matCellDef="let word"> {{word.meaningAttempts}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="clozeFailures">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cloze Failures</th>
+        <td mat-cell *matCellDef="let word"> {{word.clozeFailures}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="clozeAttempts">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cloze Attempts </th>
+        <td mat-cell *matCellDef="let word"> {{word.clozeAttempts}} </td>
+      </ng-container>
+
+      <!--<ng-container matColumnDef="details">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let word">
+          <a [routerLink]="['/org/details', orgId, 'student', 'details', student.id]">
+            details
+          </a>
+        </td>
+      </ng-container>-->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

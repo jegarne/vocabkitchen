@@ -1,0 +1,19 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <div *ngIf="loading">
+      <p>Loading...</p>
+    </div>
+    <div *ngIf="!loading">
+      <h2>Organization Dashboard</h2>
+      <hr />
+      <h3>Choose an organization:</h3>
+      <ol>
+        <li *ngFor="let org of orgs">
+          <a [routerLink]="['/org-admin/details', org.id]">
+            {{ org.name }}
+          </a>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+﻿teacher workflow		student workflow
+
+--Public Module--
+profile text*
+sign up for new org*
+accept invite*
+
+--Org Admin Module--
+
+update org info
+invite teachers*	->	accept invite, create account*
+manage teachers*
+
+--Org Dashboard Module--
+
+invite students* ->		accept invite, create account
+manage students*
+set up tags
+tag students
+save profiled readings
+edit readings*
+tag reading	->			new reading notification
+define words*			<- identify unkown words
+monitor progress		<- study words
+
+--Student Module--
+
+						view readings
+						identify unkown words
+						study words
+
+
+Data Model
+
+
+						   OrgAdmin	
+						/			  \
+					Org - OrgTeacher - VkUser
+				  /	|	\			  /
+				 /	|	  OrgStudent
+			    /	|				\
+		TagEntry  OrgReading		StudentWord - progress tracking data
+			   \	|				   |
+			  Reading - ContentItem	- Word
+							  \		\	\				
+							   \	 Annotation
+							    \	 |
+								 Context
+
+						ReadingWord
+						  IsKnown = has annotations
+						  Count = times pressed
+						  OccurenceIndex = location in text
+

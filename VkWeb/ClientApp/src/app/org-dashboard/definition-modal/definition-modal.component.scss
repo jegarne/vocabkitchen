@@ -1,0 +1,22 @@
+.modal-section-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 1rem 1rem 1rem;
+  border-bottom: 1px solid #e9ecef;
+
+  > :not(:first-child)
+  {
+  margin-left: .25rem;
+  }
+
+  > :not(:last-child)
+  {
+  margin-right: .25rem;
+  }
+}
+
+.small-text {
+  font-size: 10px;
+  font-style: italic;
+}

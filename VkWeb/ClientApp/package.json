@@ -1,0 +1,63 @@
+{
+  "name": "vocab-kitchen",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^9.0.5",
+    "@angular/cdk": "^9.1.1",
+    "@angular/common": "^9.0.5",
+    "@angular/compiler": "^9.0.5",
+    "@angular/core": "^9.0.5",
+    "@angular/forms": "^9.0.5",
+    "@angular/material": "^9.1.1",
+    "@angular/platform-browser": "^9.0.5",
+    "@angular/platform-browser-dynamic": "^9.0.5",
+    "@angular/platform-server": "^9.0.5",
+    "@angular/router": "^9.0.5",
+    "aspnet-prerendering": "^3.0.1",
+    "core-js": "^3",
+    "ng-recaptcha": "^5.0.0",
+    "ngx-audio-player": "^9.0.6",
+    "ngx-bootstrap": "^5.1.0",
+    "rxjs": "^6.5.4",
+    "rxjs-compat": "^6.3.3",
+    "tslib": "^1.11.1",
+    "typescript": "^3.7.5",
+    "zone.js": "^0.10.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.900.5",
+    "@angular/cli": "^9.0.5",
+    "@angular/compiler-cli": "^9.0.5",
+    "@angular/language-service": "^9.0.5",
+    "@types/jasmine": "^2.8.9",
+    "@types/jasminewd2": "~2.0.2",
+    "@types/node": "^10.12.1",
+    "codelyzer": "^5",
+    "jasmine-core": "^3.3.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "karma": "^3.1.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^2.0.0",
+    "karma-coverage-istanbul-reporter": "^2.0.4",
+    "karma-jasmine": "^2.0.1",
+    "karma-jasmine-html-reporter": "^1.4.0",
+    "protractor": "^5.4.1",
+    "rxjs-tslint": "^0.1.5",
+    "ts-node": "~4.1.0",
+    "tslint": "^5.11.0"
+  },
+  "optionalDependencies": {
+    "node-sass": "^4.12.0"
+  }
+}

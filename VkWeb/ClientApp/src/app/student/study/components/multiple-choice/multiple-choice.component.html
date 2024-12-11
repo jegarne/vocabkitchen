@@ -1,0 +1,6 @@
+<p><b>Match the word to the meaning</b></p>
+<p><em>{{word.definition}}</em></p>
+<ol>
+  <li *ngFor="let option of options"><button class="btn btn-outline-dark"
+                                       (click)="checkAnswer(option)">{{option}}</button></li>
+</ol>

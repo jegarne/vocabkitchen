@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <student-nav [id]="id"></student-nav>
+    <h3>My Words</h3>
+    <hr />
+    <div class="row" *ngIf="loading">
+      <div class="col-xs-12">
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div *ngIf="!loading">
+      <div class="row justify-content-left">
+        <div class="col-xs-12 col-sm-3 col-xl-2">
+          <a class="btn btn-primary" [routerLink]="['/student/study', '' ]">
+            Practice
+          </a>
+        </div>
+      </div>
+      <hr />
+      <div class="row justify-content-left">
+        <div class="col-xs-12 col-sm-4 col-xl-3">
+          <button type="button" class="btn btn-outline-danger btn-sm" [class.active]="show === 0" (click)="show = 0">
+            To learn <span class="badge badge-light">{{newWords.length}}</span>
+          </button>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-xl-3">
+          <button type="button" class="btn btn-outline-warning btn-sm" [class.active]="show === 1" (click)="show = 1">
+            Learning <span class="badge badge-light">{{inProgressWords.length}}</span>
+          </button>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-xl-3">
+          <button type="button" class="btn btn-outline-success btn-sm" [class.active]="show === 2" (click)="show = 2">
+            Learned <span class="badge badge-light">{{knownWords.length}}</span>
+          </button>
+        </div>
+
+      </div>
+      <div class="row" style="margin-top: 20px;"
+           *ngIf="knownWords.length === 0 && inProgressWords.length === 0 && newWords.length === 0">
+        <div class="col-8">
+          <p>
+            Start <a [routerLink]="['/student/readings']">reading</a> to find new words.
+            If there aren't any readings yet, ask your teacher.
+          </p>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-11">
+          <div *ngIf="show === 0">
+            <div class="col-xs-12">
+              <div class="alert alert-primary" role="alert">
+                These are your new words.  Press a word below to see its definition.  When you're ready,
+                start <a [routerLink]="['/student/study', '' ]">practicing</a>.
+              </div>
+            </div>
+            <word-expander [wordClass]="" [words]="newWords"></word-expander>
+          </div>
+          <div *ngIf="show === 1">
+            <div class="col-xs-12">
+              <div class="alert alert-primary" role="alert">
+                These are words you're learning.  You need to answer each question correctly 2 times.  Ready?
+                <a [routerLink]="['/student/study', '' ]">Practice</a>.
+              </div>
+            </div>
+            <word-expander [wordClass]="" [words]="inProgressWords"></word-expander>
+          </div>
+          <div *ngIf="show === 2">
+            <div class="col-xs-12">
+              <div class="alert alert-primary" role="alert">
+                Nice work! You've learned these words. <a [routerLink]="['/student/study', '' ]">Review them</a>.
+              </div>
+            </div>
+            <word-expander [wordClass]="" [words]="knownWords"></word-expander>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

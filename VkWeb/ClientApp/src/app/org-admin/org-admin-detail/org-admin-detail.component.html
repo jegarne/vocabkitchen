@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <org-admin-nav [id]="orgId" [title]="org.name"></org-admin-nav>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="alert alert-primary" role="alert">
+          Tip: to preview what students see, send a <a [routerLink]="['/org-admin/students', orgId]">
+            student invitation
+          </a> to your email and you will be automatically added as a student.
+          Once you've added yourself as a student, you can <a [routerLink]="['/org/details', orgId, 'tags']">
+            tag yourself
+          </a> and any <a [routerLink]="['/org/details', orgId]">
+            readings
+          </a> under those tags will be
+          shared with you.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+
+        <h4>Teachers</h4>
+        <ol>
+          <li *ngFor="let t of org.teachers">
+            {{ t.lastName }}, {{t.firstName}} ({{t.email}})
+          </li>
+        </ol>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <h4>Students</h4>
+        <ol>
+          <li *ngFor="let t of org.students">
+            {{ t.lastName }}, {{t.firstName}} ({{t.email}})
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-4">
+    <h3>What's on your mind?</h3>
+    <p>
+      Right now we're trying out some new ideas, and we want VocabKitchen to be something teachers and students love.
+    </p>
+    <p>
+      This is a good place to:
+    </p>
+    <ul>
+      <li>Let me know if something is broken.  Please give me enough detail to understand the problem.</li>
+      <li>Tell me what you like about VocabKitchen and how you're using it.</li>
+      <li>Talk about how you're teaching or learning vocabulary and the challenges you face.</li>
+    </ul>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-4">
+    <div *ngIf="wasSubmitted">
+      <div class="alert alert-success" role="alert">
+        Thanks for the info.  We'll look into it.
+      </div>
+    </div>
+    <div *ngIf="!wasSubmitted">
+      <form #feedbackForm="ngForm" (ngSubmit)="onSubmit(feedbackForm)">
+        <div class="form-group">
+          <label for="fullName">Name</label>
+          <input class="form-control" type="text" name="fullName" placeholder="Your full name" ngModel>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control" type="email" name="email" placeholder="Your email" ngModel>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Feedback</label>
+          <textarea class="form-control" rows="10" style="height:100%;" name="message" placeholder="" ngModel></textarea>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

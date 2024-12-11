@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <div *ngIf="loading">
+      <p>Loading...</p>
+    </div>
+    <div *ngIf="!loading">
+      <h2>Organization Dashboard</h2>
+      <hr />
+      <h3>Choose an organization:</h3>
+      <ol>
+        <li *ngFor="let org of orgs">
+          <a [routerLink]="['/org/details', org.id]">
+            {{ org.name }}
+          </a>
+        </li>
+      </ol>
+      <br/><br/>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Set Default Organization</h5>
+          <p class="card-text">Readings you save from the profiler will be sent to your default organization.</p>
+          <mat-radio-group aria-labelledby="radio-group-label"
+                           class="radio-group"
+                           [ngModel]="defaultOrgId"
+                           (ngModelChange)="onChange($event)"
+                           labelPosition="after">
+            <mat-radio-button class="radio-button" *ngFor="let org of orgs" [value]="org.id">
+              {{ org.name }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

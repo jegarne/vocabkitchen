@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <org-dashboard-nav [id]="org.id" [title]="'Tags: ' + org.name"></org-dashboard-nav>
+    <div class="alert alert-primary">
+      Tags group readings and students together.  Use them to organize around chapters, themes, classes,
+      or whatever suits your needs.  <br /><br />Readings and students will be tagged with the selected tag by default.
+    </div>
+    <div class="row no-gutters">
+      <div class="col-12">
+        <form class="form-inline mt-2 mt-md-0">
+          <input #newTag class="form-control mr-sm-2" type="text" placeholder="Add Tag" aria-label="Add Tag">
+          <button class="btn btn-primary my-2 my-sm-0" type="button" (click)="addTag(newTag.value)">Add</button>
+        </form>
+      </div>
+    </div>
+    <br />
+    <server-errors [serverErrors]="serverErrors"></server-errors>
+    <ol>
+      <li *ngFor="let tag of org.tags">
+        <div class="row no-gutters">
+          <div class="col-3">
+            {{ tag.value }}
+          </div>
+          <div class="col-1">
+            <a [routerLink]="['/org/details', orgId, 'tag', tag.id, 'readings']"><i class="fas fa-book-open"></i></a>
+          </div>
+          <div class="col-1">
+            <a [routerLink]="['/org/details', orgId, 'tag', tag.id, 'students']"><i class="fas fa-book-reader"></i></a>
+          </div>
+          <div class="col-1">
+            <i class="fas fa-trash text-primary" (click)="deleteTag(tag.id)"></i>
+          </div>
+          <div class="col-1">
+            <mat-checkbox [checked]="tag.isDefault"
+                          id="{{tag.id}}" name="{{tag.id}}"
+                          (change)="toggleDefault(tag.id)">
+            </mat-checkbox>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.bg-light {
+  background-color: #fff !important;
+  margin-bottom: 15px;
+}
+
+.navbar-light .navbar-brand {
+  font-family: 'Lobster',Georgia,Times,serif;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.btn-sm {
+  min-width: 80px;
+  margin-bottom: 5px;
+}
+
+.navbar {
+  padding-left: 0;
+  padding-right: 0;
+}

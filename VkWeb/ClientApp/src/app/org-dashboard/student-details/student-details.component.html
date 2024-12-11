@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <p>
+      <button (click)="back()" class="btn btn-link">
+        Back
+      </button>
+    </p>
+    <h2>{{student.firstName}} {{student.lastName}}</h2>
+
+    <h3>Tags</h3>
+    <hr />
+    <div class="alert alert-primary" role="alert">
+      Tags connect students with readings.
+    </div>
+    <tags-search [orgId]="orgId" [existingTags]="student.tags"
+                 (newTag)="addTag($event)"
+                 (removedTag)="removeTag($event)"></tags-search>
+
+    <br />
+    <h3>Words</h3>
+    <hr />
+    <div class="alert alert-primary" role="alert">
+      This table shows this student's interactions with these words.
+    </div>
+    <table mat-table [dataSource]="words" class="mat-elevation-z8" matSort>
+
+      <ng-container matColumnDef="word">
+        <th style="text-align:left;padding-left:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>Word</th>
+        <td style="text-align:left;padding-left:5px;" mat-cell *matCellDef="let word">{{word.word}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
+        <td mat-cell *matCellDef="let word">{{word.status}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="isKnownDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="isKnownDate">Last Successful Review</th>
+        <td mat-cell *matCellDef="let word">{{word.isKnown ? (word.isKnownDate | date:'shortDate') : "--"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalAttempts">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="totalAttempts">Total Attempts</th>
+        <td mat-cell *matCellDef="let word">{{word.totalAttempts}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="spellingFailPercentage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="spellingFailedAttempts">Spelling Fails</th>
+        <td mat-cell *matCellDef="let word">{{word.spellingFailedAttempts}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="clozeFailPercentage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="clozeFailedAttempts">Cloze Fails</th>
+        <td mat-cell *matCellDef="let word">{{word.clozeFailedAttempts}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="meaningFailPercentage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="meaningFailedAttempts">Meaning Fails</th>
+        <td mat-cell *matCellDef="let word">{{word.meaningFailedAttempts}}</td>
+      </ng-container>
+
+      <!--<ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let student">
+        <a [routerLink]="['/org/details', orgId, 'student', 'details', student.id]">
+          details
+        </a>
+      </td>
+    </ng-container>-->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+

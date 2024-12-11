@@ -1,0 +1,24 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-6">
+    <div *ngIf="words.length">
+      <h2>Pretest</h2>
+      <hr />
+      <div>
+        <h3>Word {{currentWordIndex + 1}} of {{words.length}}</h3>
+        <div>
+          <spelling [word]="currentWord.word" [allowSound]="false"
+                    (isCorrect)="handleAnswer($event)"></spelling>
+        </div>
+        <p>{{currentWord.definition}}</p>
+        <p>
+          <button type="button" class="btn btn-outline-dark" (click)="skipWord()">Skip</button>
+          <button type="button" class="btn btn-outline-info" (click)="openHelp()">Help</button>
+        </p>
+      </div>
+    </div>
+    <div *ngIf="!words.length">
+      <p>Loading pretest...</p>
+    </div>
+  </div>
+</div>
+

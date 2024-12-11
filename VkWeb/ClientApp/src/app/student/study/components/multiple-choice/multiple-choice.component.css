@@ -1,0 +1,12 @@
+.btn {
+  min-width: 150px;
+}
+
+ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+ol li {
+  margin-top: 5px;
+}

@@ -1,0 +1,46 @@
+<div *ngIf="isEditing">
+  <div class="row justify-content-left" style="margin-bottom:10px;">
+    <div class="col-xs-12 col-sm-2">
+      <button type="button" class="btn btn-outline-dark" (click)="edit()">Save Tags</button>
+    </div>
+    <div class="col-xs-12 col-sm-10">
+      <mat-form-field class="example-chip-list">
+        <mat-chip-list #chipList aria-label="Tags">
+          <mat-chip *ngFor="let tag of existingTags"
+                    [selectable]="true"
+                    [removable]="true"
+                    (removed)="remove(tag)">
+            {{tag.value}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="Tags"
+                 #tagInput
+                 [formControl]="tagCtrl"
+                 [matAutocomplete]="auto"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="true"
+                 (matChipInputTokenEnd)="add($event)" />
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                          (optionSelected)="selected($event)">
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{ tag.value }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isEditing">
+  <div class="row justify-content-left" style="margin-bottom:10px;">
+    <div class="col-xs-12 col-sm-2">
+      <button type="button" class="btn btn-outline-dark" (click)="edit()">edit tags</button>
+    </div>
+    <div class="col-xs-12 col-sm-10">
+      <span *ngFor="let tag of existingTags; let i = index;" style="font-style:italic">
+       {{tag.value}}<span *ngIf="i !== existingTags.length - 1">, </span>
+      </span>
+    </div>
+  </div>
+</div>

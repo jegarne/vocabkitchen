@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-4">
+    <h3>
+      Welcome to the new VocabKitchen!
+    </h3>
+    <p>
+      We're currently testing our redesign.  Documentation will be limited as we finalize the site over the next 6 months, so be brave
+      and click around.
+    </p>
+    <p>
+      I'll be testing the application in the St. Louis, Missouri area this spring, but I'd
+      like <a [routerLink]='["/feedback"]'>to hear from</a> great language teachers all over the world.
+    </p>
+    <p>
+      When you sign up here you'll be the administrator of your organization (for example, your school) and you'll
+      be able to invite as many teachers as you'd like.  My recommendation
+      is to try it out with one other teacher in your school.  For now you can only invite 60 students.  If you'd like
+      to add more than 60 students to your organization, contact me at contact@vocabkitchen.com.
+    </p>
+    <p>
+      I will be testing and making changes to the site through mid-year 2020.  Some features may change and I can't guarantee that
+      your content will remain available or that everything will work smoothly.  My goal is to have a stable and well-tested site
+      in time for language programs starting in August, 2020.
+    </p>
+    <p>
+      If you were a user of the old version of the site, you'll need to sign up for a new account. There are
+      currently no plans to migrate data or accounts from the old sites.
+    </p>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-md-4">
+    <h3>Create an account for your school:</h3>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+        <label for="organizationName">Organization Name</label>
+        <input class="form-control" formControlName="organizationName" id="organizationName"
+               [ngClass]="signUpForm.get('organizationName').invalid
+                 && (signUpForm.get('organizationName').dirty || signUpForm.get('organizationName').touched) ? 'is-invalid' : ''" />
+        <div class="invalid-feedback">
+          <control-messages [control]="signUpForm.controls.organizationName"></control-messages>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">Your first Name</label>
+        <input class="form-control" formControlName="firstName" id="firstName"
+               [ngClass]="signUpForm.get('firstName').invalid
+                 && (signUpForm.get('firstName').dirty || signUpForm.get('firstName').touched) ? 'is-invalid' : ''" />
+        <div class="invalid-feedback">
+          <control-messages [control]="signUpForm.controls.firstName"></control-messages>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Your last name</label>
+        <input class="form-control" formControlName="lastName" id="lastName"
+               [ngClass]="signUpForm.get('lastName').invalid
+                 && (signUpForm.get('lastName').dirty || signUpForm.get('lastName').touched) ? 'is-invalid' : ''" />
+        <div class="invalid-feedback">
+          <control-messages [control]="signUpForm.controls.lastName"></control-messages>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your email</label>
+        <input class="form-control" formControlName="email" id="email"
+               [ngClass]="signUpForm.get('email').invalid
+                 && (signUpForm.get('email').dirty || signUpForm.get('email').touched) ? 'is-invalid' : ''" />
+        <div class="invalid-feedback">
+          <control-messages [control]="signUpForm.controls.email"></control-messages>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" formControlName="password" id="password" type="password"
+               [ngClass]="signUpForm.get('password').invalid
+                 && (signUpForm.get('password').dirty || signUpForm.get('password').touched)? 'is-invalid' : ''" />
+        <div class="invalid-feedback">
+          <control-messages [control]="signUpForm.controls.password"></control-messages>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input class="form-control" formControlName="confirmPassword" type="password"
+               [ngClass]="signUpForm.hasError('passwordMismatch')
+                 && (signUpForm.get('confirmPassword').dirty || signUpForm.get('confirmPassword').touched)? 'is-invalid' : ''" />
+        <div class="invalid-feedback">
+          <control-messages [control]="signUpForm.controls.confirmPassword"></control-messages>
+          <div *ngIf="signUpForm.hasError('passwordMismatch')">
+            Passwords do not match
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="signUpForm.invalid || isRequesting">Sign Up</button>
+        <app-spinner [isRunning]="isRequesting"></app-spinner>
+      </div>
+
+      <server-errors [serverErrors]="serverErrors"></server-errors>
+
+    </form>
+  </div>
+</div>
+
