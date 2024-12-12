@@ -28,7 +28,7 @@ The monolithic .NET application contains four projects:
 
 ### Domain Driven Design
 
-The application uses domain driven design to model the behavior of teaching new vocabulary words from a text to a group of students. At the heart of this domain there is a reading (a text), and words or phrases in the reading which students can understand (or not), and word definitions which need to help students gain understanding of the word's meaning, pronunciation and spelling.
+The application uses domain driven design to model the behavior of teaching new vocabulary words from a text to a group of students. At the heart of this domain there is a reading (a text), words or phrases in the reading which students can understand (or not), and word definitions to help students gain understanding of the word's meaning, pronunciation and spelling.
 
 The heart of this design is the [Reading](VkCore/Models/ReadingModel/Reading.cs) class. This was loosely inspired by some homework I did on how Google Docs is built. A `Reading` consists of a collection of [ContentItems](VkCore/Models/ReadingModel/ContentItem.cs) (in hindsight, that could've had a better name like `ReadingSection` or something). A `Reading` is text broken up into a collection of strings (`ContentItems`) each with a index that, when sorted in order, allows the `Reading` to output the complete text body from its parts.
 
