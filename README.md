@@ -2,9 +2,11 @@
 
 https://vocabkitchen.com/
 
+_Coming soon: I'm updating the text editor/definition maker feature of this codebase to dotnet 9 and Angular 19 and will make it available in as a small stand alone application._
+
 ## Domain Overview
 
-This is a project that came out of my work as a language teacher. The application allows teachers to take a text, adjust it to a specific vocabulary level, and then collect data on unknown words in the text while automatically creating targeted learning activities for each student.
+This is a peronsal project that came out of my work as a language teacher. The application allows teachers to take a text, adjust it to a specific vocabulary level, and then collect data on unknown words in the text while automatically creating targeted learning activities for each student.
 
 As a SAAS product, it never gained traction as it was challenging to identify a customer/purchasing decision maker in an educational system for a small, specialized platform like this. The vocabulary profiler as a free service has been successful and has had, for several years, a global user base of about 5000 unique yearly visitors. Currently I maintain the free version of the site with hosting paid by an educational institution in the UAE.
 
