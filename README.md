@@ -2,7 +2,7 @@
 
 https://vocabkitchen.com/
 
-_Coming soon: I'm updating the text editor/definition maker feature of this codebase to dotnet 9 and Angular 19 and will make it available in as a small stand alone application._
+_Coming soon: I'm updating the text editor/definition maker feature of this codebase to dotnet 9 and Angular 19 and will make it available as a stand alone application._
 
 ## Domain Overview
 
